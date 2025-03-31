@@ -1,6 +1,7 @@
+import 'package:aeye/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'screens/RegisterPage.dart'; // Import your screen here
-import 'screens/homepage.dart';
+import 'screens/HomePage.dart';
 
 void main() {
   runApp(const MyApp());
