@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RegisterPage(), // This is your custom screen
+      home: Homepage(), // This is your custom screen
     );
   }
 }
