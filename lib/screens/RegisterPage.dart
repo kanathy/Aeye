@@ -7,7 +7,7 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final textFieldBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: const BorderSide(color: Color.fromARGB(255, 195, 4, 4)),
+      borderSide: const BorderSide(color: Color.fromARGB(255, 158, 158, 158)),
     );
 
     return Scaffold(
