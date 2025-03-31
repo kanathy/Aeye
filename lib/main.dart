@@ -1,4 +1,4 @@
-import 'package:aeye/screens/homepage.dart';
+import 'package:aeye/screens/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'screens/RegisterPage.dart'; // Import your screen here
 import 'screens/HomePage.dart';
