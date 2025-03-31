@@ -11,28 +11,32 @@ class HomePage extends StatelessWidget {
     );
 
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 175, 200, 218),
-              Color.fromARGB(255, 15, 40, 99), // Deeper blue
-            ],
-          ),
-        ),
-        child: Center(
-          child: Text(
-            "Welcome to Eye Health App",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 175, 200, 218),
+                  Color.fromARGB(255, 15, 40, 99), // Deeper blue
+                ],
+              ),
             ),
           ),
-        ),
-        // Replace with your actual content
+
+          Center(
+            child: Text(
+              "Welcome to Eye Health App",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ], // Replace with your actual content
       ),
     );
   }
