@@ -8,54 +8,44 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // 🔹 Background Gradient
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color.fromARGB(255, 175, 200, 218),
-                  Color.fromARGB(255, 205, 83, 185),
-                ],
-              ),
-            ),
-          ),
+          // 🔹 Background Color
+          Container(color: const Color.fromARGB(255, 206, 190, 174)),
 
           // 🔹 Content
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 🔹 Profile and Name Row
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       CircleAvatar(
-                        backgroundColor: Colors.white,
+                        backgroundColor: Color(0xFFFDF6EC),
                         child: Icon(Icons.person, color: Colors.black),
                       ),
                       Text(
                         "Prameh",
                         style: TextStyle(
                           fontSize: 18,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
 
-                  const SizedBox(height: 30),
-
-                  // 🔹 Grid Buttons
-                  Expanded(
+                  const Spacer(), // Pushes the grid to the bottom
+                  // 🔹 Grid Buttons (Bottom Half)
+                  SizedBox(
+                    height:
+                        MediaQuery.of(context).size.height *
+                        0.40, // Bottom half
                     child: GridView.count(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 30,
                       children: const [
                         FeatureCard(title: "Device", icon: Icons.devices),
                         FeatureCard(
@@ -82,56 +72,87 @@ class HomePage extends StatelessWidget {
 
       // 🔹 Bottom Navigation Bar
       bottomNavigationBar: BottomAppBar(
+        color: const Color.fromARGB(255, 206, 190, 174),
+        elevation: 0,
         shape: const CircularNotchedRectangle(),
-        color: const Color.fromARGB(255, 15, 40, 99),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.home, color: Colors.white),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.camera_alt, color: Colors.white),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.notifications, color: Colors.white),
-              onPressed: () {},
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.home, color: Colors.black),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.flash_on, color: Colors.black),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.person, color: Colors.black),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.dashboard, color: Colors.black),
+                onPressed: () {},
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-// 🔹 FeatureCard Widget
-class FeatureCard extends StatelessWidget {
+// 🔹 FeatureCard Widget with toggle color on tap
+class FeatureCard extends StatefulWidget {
   final String title;
   final IconData icon;
 
   const FeatureCard({super.key, required this.title, required this.icon});
 
   @override
+  State<FeatureCard> createState() => _FeatureCardState();
+}
+
+class _FeatureCardState extends State<FeatureCard> {
+  bool _isTapped = false;
+
+  void _handleTap() {
+    setState(() {
+      _isTapped = !_isTapped;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        // TODO: Add navigation
-      },
-      child: Container(
+      onTap: _handleTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.9),
-          borderRadius: BorderRadius.circular(15),
+          color: _isTapped ? const Color(0xFFBA965A) : Colors.black,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 40, color: Colors.deepPurple),
+            Icon(widget.icon, size: 36, color: Colors.white),
             const SizedBox(height: 10),
             Text(
-              title,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              widget.title,
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
             ),
           ],
         ),
