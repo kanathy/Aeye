@@ -62,7 +62,7 @@ class ScreenTimeChart extends StatelessWidget {
           toY: y,
           width: 20,
           borderRadius: BorderRadius.circular(4),
-          color: const Color(0xFF6B2C91),
+          color: const Color.fromARGB(255, 185, 148, 54),
         ),
       ],
     );

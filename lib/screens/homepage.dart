@@ -1,16 +1,61 @@
 import 'package:aeye/assets/ScreenTimeChart.dart';
 import 'package:flutter/material.dart';
-
 import 'package:aeye/screens/Device.dart';
 import 'package:aeye/screens/DrivingMode.dart';
-import 'package:fl_chart/fl_chart.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  // Function to open the drawer
+  void _openDrawer(BuildContext context) {
+    Scaffold.of(context).openDrawer();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Add the Drawer
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 206, 190, 174),
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+          ],
+        ),
+      ),
       body: Stack(
         children: [
           // 🔹 Background Color
@@ -22,31 +67,32 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
                 children: [
-                  // 🔹 Profile and Name Row
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      CircleAvatar(
-                        radius: 55, // 👈 Avatar radius
-                        backgroundColor: Color(0xFFFDF6EC),
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.black,
-                          size: 52,
-                        ), // 👈 Icon size
-                      ),
-                      Text(
-                        "Prameh",
-                        style: TextStyle(
-                          fontSize: 22, // 👈 Font size for name
-                          color: Color.fromARGB(255, 33, 32, 32),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+                  // 🔹 Profile and Name Row (Updated with onPressed)
+                 Row(
+  children: [
+    Builder(
+      builder: (context) => IconButton(
+        icon: const Icon(Icons.menu), // Changed to menu icon for clarity
+        onPressed: () {
+          Scaffold.of(context).openDrawer();
+        },
+        color: const Color.fromARGB(255, 33, 32, 32),
+        iconSize: 28,
+      ),
+    ),
+    const Spacer(),
+    const CircleAvatar(
+      radius: 20,
+      backgroundColor: Color(0xFFFDF6EC),
+      child: Icon(
+        Icons.person,
+        color: Colors.black,
+        size: 20,
+      ),
+    ),
+  ],
+),
 
-                  // Add this import at the top
                   const SizedBox(height: 20),
                   const Align(
                     alignment: Alignment.centerLeft,
