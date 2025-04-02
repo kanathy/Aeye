@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
       body: Stack(
         children: [
           // 🔹 Background Color
-          Container(color: const Color.fromARGB(255, 206, 190, 174)),
+          Container(color: const Color.fromARGB(255, 214, 195, 178)),
 
           // 🔹 Content
           SafeArea(
@@ -218,7 +218,7 @@ class _HomePageState extends State<HomePage> {
 
       // 🔹 Bottom Navigation Bar with dynamic icon color
       bottomNavigationBar: BottomAppBar(
-        color: const Color.fromARGB(255, 206, 190, 174),
+        color: const Color.fromARGB(255, 214, 195, 178),
         elevation: 0,
         shape: const CircularNotchedRectangle(),
         child: Padding(

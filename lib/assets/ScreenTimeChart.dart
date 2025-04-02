@@ -7,7 +7,7 @@ class ScreenTimeChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 220,
+      height: 219,
       child: BarChart(
         BarChartData(
           maxY: 6,
@@ -55,6 +55,13 @@ class ScreenTimeChart extends StatelessWidget {
   }
 
   BarChartGroupData makeBar(int x, double y) {
+    Color barColor;
+    if (x % 2 == 0) {
+      barColor = Colors.black; // Even index
+    } else {
+      barColor = const Color.fromARGB(255, 195, 152, 115); // Odd index
+    }
+
     return BarChartGroupData(
       x: x,
       barRods: [
@@ -62,7 +69,11 @@ class ScreenTimeChart extends StatelessWidget {
           toY: y,
           width: 20,
           borderRadius: BorderRadius.circular(4),
+<<<<<<< HEAD
           color: const Color.fromARGB(255, 185, 148, 54),
+=======
+          color: barColor,
+>>>>>>> 9f0c22739ee58c99c1bc5595895bfb25503f11d0
         ),
       ],
     );
