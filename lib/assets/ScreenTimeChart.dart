@@ -7,7 +7,7 @@ class ScreenTimeChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 220,
+      height: 219,
       child: BarChart(
         BarChartData(
           maxY: 6,
