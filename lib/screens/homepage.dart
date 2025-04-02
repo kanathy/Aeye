@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
                             width: 165,
                             height: 180,
                             iconSize: 34,
-                            fontSize: 13,
+                            fontSize: 22,
                           ),
                           FeatureCard(
                             title: "Driving Mode",
@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                             width: 165,
                             height: 180,
                             iconSize: 34,
-                            fontSize: 13,
+                            fontSize: 22,
                           ),
                           FeatureCard(
                             title: "For Knee Users",
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
                             width: 165,
                             height: 180,
                             iconSize: 34,
-                            fontSize: 13,
+                            fontSize: 22,
                           ),
                           FeatureCard(
                             title: "Eye Check",
@@ -81,7 +81,7 @@ class HomePage extends StatelessWidget {
                             width: 165,
                             height: 180,
                             iconSize: 34,
-                            fontSize: 13,
+                            fontSize: 22,
                           ),
                         ],
                       ),
