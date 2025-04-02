@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:aeye/screens/Device.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -50,7 +51,7 @@ class HomePage extends StatelessWidget {
                       child: Wrap(
                         spacing: 25, // 👈 Horizontal space between cards
                         runSpacing: 25, // 👈 Vertical space between cards
-                        children: const [
+                        children: [
                           FeatureCard(
                             title: "Device",
                             icon: Icons.devices,
@@ -58,6 +59,14 @@ class HomePage extends StatelessWidget {
                             height: 180,
                             iconSize: 34,
                             fontSize: 22,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const DevicePage(),
+                                ),
+                              );
+                            },
                           ),
                           FeatureCard(
                             title: "Driving Mode",
