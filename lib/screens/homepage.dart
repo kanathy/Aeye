@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
                         "Prameh",
                         style: TextStyle(
                           fontSize: 22, // 👈 Font size for name
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 33, 32, 32),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
                   const Spacer(), // Feature cards will still stay in the bottom half
                   // 🔹 Feature Cards Section
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.42,
+                    height: MediaQuery.of(context).size.height * 0.35,
                     child: Center(
                       child: Wrap(
                         spacing: 25, // 👈 Horizontal space between cards
@@ -78,8 +78,8 @@ class HomePage extends StatelessWidget {
                           FeatureCard(
                             title: "Device",
                             icon: Icons.devices,
-                            width: 165,
-                            height: 180,
+                            width: 150,
+                            height: 150,
                             iconSize: 34,
                             fontSize: 22,
                             onTap: () {
@@ -94,8 +94,8 @@ class HomePage extends StatelessWidget {
                           FeatureCard(
                             title: "Driving Mode",
                             icon: Icons.directions_car,
-                            width: 165,
-                            height: 180,
+                            width: 150,
+                            height: 150,
                             iconSize: 34,
                             fontSize: 22,
                             onTap: () {
@@ -110,16 +110,16 @@ class HomePage extends StatelessWidget {
                           FeatureCard(
                             title: "For Knee Users",
                             icon: Icons.accessibility_new,
-                            width: 165,
-                            height: 180,
+                            width: 150,
+                            height: 150,
                             iconSize: 34,
                             fontSize: 22,
                           ),
                           FeatureCard(
                             title: "Eye Check",
                             icon: Icons.remove_red_eye,
-                            width: 165,
-                            height: 180,
+                            width: 150,
+                            height: 150,
                             iconSize: 34,
                             fontSize: 22,
                           ),
@@ -220,7 +220,10 @@ class _FeatureCardState extends State<FeatureCard> {
         width: widget.width,
         height: widget.height,
         decoration: BoxDecoration(
-          color: _isTapped ? const Color(0xFFBA965A) : Colors.black,
+          color:
+              _isTapped
+                  ? const Color(0xFFBA965A)
+                  : const Color.fromARGB(255, 44, 43, 43),
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -233,13 +236,13 @@ class _FeatureCardState extends State<FeatureCard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(widget.icon, size: widget.iconSize, color: Colors.white),
+            Icon(widget.icon, size: 40, color: Colors.white),
             const SizedBox(height: 8),
             Text(
               widget.title,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: widget.fontSize,
+                fontSize: 15,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),

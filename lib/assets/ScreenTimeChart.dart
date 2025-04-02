@@ -7,7 +7,7 @@ class ScreenTimeChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150,
+      height: 220,
       child: BarChart(
         BarChartData(
           maxY: 6,
@@ -16,14 +16,24 @@ class ScreenTimeChart extends StatelessWidget {
             makeBar(1, 3.0),
             makeBar(2, 4.2),
             makeBar(3, 4.8),
-            makeBar(4, 3.5),
+            makeBar(4, 4.5),
+            makeBar(5, 3.5),
+            makeBar(6, 6.2),
           ],
           titlesData: FlTitlesData(
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
                 getTitlesWidget: (value, meta) {
-                  const times = ['9am', '12pm', '3pm', '6pm', '9pm'];
+                  const times = [
+                    'MON',
+                    'TUES',
+                    'WED',
+                    'THURS',
+                    'FRI',
+                    'SAT',
+                    'SUN',
+                  ];
                   return Text(
                     times[value.toInt()],
                     style: const TextStyle(fontSize: 10),
