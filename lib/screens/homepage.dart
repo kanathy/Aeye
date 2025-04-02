@@ -11,21 +11,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Function to open the drawer
-  void _openDrawer(BuildContext context) {
-    Scaffold.of(context).openDrawer();
-  }
-
-  // State to track the selected feature card index (0 to 3 for the four cards)
   int _selectedFeatureIndex = -1;
-
-  // State to track the selected navigation bar index (0 to 3 for the four buttons)
   int _selectedNavIndex = -1;
 
   @override
   void initState() {
     super.initState();
-    // Reset the selected indices when the page is initialized or revisited
     _selectedFeatureIndex = -1;
     _selectedNavIndex = -1;
   }
@@ -33,7 +24,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Add the Drawer
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -54,50 +44,40 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text('Home'),
-              onTap: () {
-                Navigator.pop(context); // Close the drawer
-              },
+              onTap: () => Navigator.pop(context),
             ),
             ListTile(
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
-              onTap: () {
-                Navigator.pop(context); // Close the drawer
-              },
+              onTap: () => Navigator.pop(context),
             ),
             ListTile(
               leading: const Icon(Icons.logout),
               title: const Text('Logout'),
-              onTap: () {
-                Navigator.pop(context); // Close the drawer
-              },
+              onTap: () => Navigator.pop(context),
             ),
           ],
         ),
       ),
       body: Stack(
         children: [
-          // 🔹 Background Color
           Container(color: const Color.fromARGB(255, 214, 195, 178)),
-
-          // 🔹 Content
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
                 children: [
-                  // 🔹 Profile and Name Row
                   Row(
                     children: [
                       Builder(
-                        builder: (context) => IconButton(
-                          icon: const Icon(Icons.menu),
-                          onPressed: () {
-                            Scaffold.of(context).openDrawer();
-                          },
-                          color: const Color.fromARGB(255, 33, 32, 32),
-                          iconSize: 28,
-                        ),
+                        builder:
+                            (context) => IconButton(
+                              icon: const Icon(Icons.menu),
+                              onPressed:
+                                  () => Scaffold.of(context).openDrawer(),
+                              color: const Color.fromARGB(255, 33, 32, 32),
+                              iconSize: 28,
+                            ),
                       ),
                       const Spacer(),
                       const CircleAvatar(
@@ -129,9 +109,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(height: 16),
                   const ScreenTimeChart(),
-
                   const Spacer(),
-                  // 🔹 Feature Cards Section
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.35,
                     child: Center(
@@ -142,68 +120,70 @@ class _HomePageState extends State<HomePage> {
                           FeatureCard(
                             title: "Device",
                             icon: Icons.devices,
+                            width: 150,
+                            height: 150,
+                            iconSize: 34,
+                            fontSize: 16,
                             index: 0,
                             selectedIndex: _selectedFeatureIndex,
                             onTap: () {
-                              setState(() {
-                                _selectedFeatureIndex = 0;
-                              });
+                              setState(() => _selectedFeatureIndex = 0);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const DevicePage(),
                                 ),
-                              ).then((_) {
-                                setState(() {
-                                  _selectedFeatureIndex = -1;
-                                });
-                              });
+                              ).then(
+                                (_) =>
+                                    setState(() => _selectedFeatureIndex = -1),
+                              );
                             },
                           ),
                           FeatureCard(
                             title: "Driving Mode",
                             icon: Icons.directions_car,
+                            width: 150,
+                            height: 150,
+                            iconSize: 34,
+                            fontSize: 16,
                             index: 1,
                             selectedIndex: _selectedFeatureIndex,
                             onTap: () {
-                              setState(() {
-                                _selectedFeatureIndex = 1;
-                              });
+                              setState(() => _selectedFeatureIndex = 1);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const DrivingModePage(),
                                 ),
-                              ).then((_) {
-                                setState(() {
-                                  _selectedFeatureIndex = -1;
-                                });
-                              });
+                              ).then(
+                                (_) =>
+                                    setState(() => _selectedFeatureIndex = -1),
+                              );
                             },
                           ),
                           FeatureCard(
                             title: "For Knee Users",
                             icon: Icons.accessibility_new,
+                            width: 150,
+                            height: 150,
+                            iconSize: 34,
+                            fontSize: 16,
                             index: 2,
                             selectedIndex: _selectedFeatureIndex,
-                            onTap: () {
-                              setState(() {
-                                _selectedFeatureIndex = 2;
-                              });
-                              // No navigation for this card yet, add if needed
-                            },
+                            onTap:
+                                () => setState(() => _selectedFeatureIndex = 2),
                           ),
                           FeatureCard(
                             title: "Eye Check",
                             icon: Icons.remove_red_eye,
+                            width: 150,
+                            height: 150,
+                            iconSize: 34,
+                            fontSize: 16,
                             index: 3,
                             selectedIndex: _selectedFeatureIndex,
-                            onTap: () {
-                              setState(() {
-                                _selectedFeatureIndex = 3;
-                              });
-                              // No navigation for this card yet, add if needed
-                            },
+                            onTap:
+                                () => setState(() => _selectedFeatureIndex = 3),
                           ),
                         ],
                       ),
@@ -215,8 +195,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-
-      // 🔹 Bottom Navigation Bar with dynamic icon color
       bottomNavigationBar: BottomAppBar(
         color: const Color.fromARGB(255, 214, 195, 178),
         elevation: 0,
@@ -229,50 +207,46 @@ class _HomePageState extends State<HomePage> {
               IconButton(
                 icon: Icon(
                   Icons.home,
-                  color: _selectedNavIndex == 0 ? const Color(0xFFB99435) : Colors.black,
+                  color:
+                      _selectedNavIndex == 0
+                          ? const Color(0xFFB99435)
+                          : Colors.black,
                   size: 28,
                 ),
-                onPressed: () {
-                  setState(() {
-                    _selectedNavIndex = 0; // Set index for home button
-                  });
-                },
+                onPressed: () => setState(() => _selectedNavIndex = 0),
               ),
               IconButton(
                 icon: Icon(
                   Icons.flash_on,
-                  color: _selectedNavIndex == 1 ? const Color(0xFFB99435) : Colors.black,
+                  color:
+                      _selectedNavIndex == 1
+                          ? const Color(0xFFB99435)
+                          : Colors.black,
                   size: 28,
                 ),
-                onPressed: () {
-                  setState(() {
-                    _selectedNavIndex = 1; // Set index for flash button
-                  });
-                },
+                onPressed: () => setState(() => _selectedNavIndex = 1),
               ),
               IconButton(
                 icon: Icon(
                   Icons.person,
-                  color: _selectedNavIndex == 2 ? const Color(0xFFB99435) : Colors.black,
+                  color:
+                      _selectedNavIndex == 2
+                          ? const Color(0xFFB99435)
+                          : Colors.black,
                   size: 28,
                 ),
-                onPressed: () {
-                  setState(() {
-                    _selectedNavIndex = 2; // Set index for person button
-                  });
-                },
+                onPressed: () => setState(() => _selectedNavIndex = 2),
               ),
               IconButton(
                 icon: Icon(
                   Icons.dashboard,
-                  color: _selectedNavIndex == 3 ? const Color(0xFFB99435) : Colors.black,
+                  color:
+                      _selectedNavIndex == 3
+                          ? const Color(0xFFB99435)
+                          : Colors.black,
                   size: 28,
                 ),
-                onPressed: () {
-                  setState(() {
-                    _selectedNavIndex = 3; // Set index for dashboard button
-                  });
-                },
+                onPressed: () => setState(() => _selectedNavIndex = 3),
               ),
             ],
           ),
@@ -315,14 +289,8 @@ class _FeatureCardState extends State<FeatureCard> {
   bool _isTapped = false;
 
   void _handleTap() {
-    setState(() {
-      _isTapped = !_isTapped;
-    });
-
-    // Call the custom onTap function if provided
-    if (widget.onTap != null) {
-      widget.onTap!();
-    }
+    setState(() => _isTapped = !_isTapped);
+    if (widget.onTap != null) widget.onTap!();
   }
 
   @override
@@ -349,15 +317,18 @@ class _FeatureCardState extends State<FeatureCard> {
           children: [
             Icon(
               widget.icon,
-              size: 40,
-              color: widget.index == widget.selectedIndex ? const Color(0xFFB99435) : Colors.white,
+              size: widget.iconSize,
+              color:
+                  widget.index == widget.selectedIndex
+                      ? const Color(0xFFB99435)
+                      : Colors.white,
             ),
             const SizedBox(height: 8),
             Text(
               widget.title,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 15,
+                fontSize: widget.fontSize,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),
