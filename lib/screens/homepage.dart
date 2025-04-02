@@ -123,6 +123,25 @@ class HomePage extends StatelessWidget {
                             iconSize: 34,
                             fontSize: 22,
                           ),
+
+                          FeatureCard(
+                            title: "Screen Time",
+                            icon:
+                                Icons
+                                    .bar_chart, // or use Icons.access_time if you prefer
+                            width: 150,
+                            height: 150,
+                            iconSize: 34,
+                            fontSize: 22,
+                            onTap: () {
+                              // Optional: Add navigation or functionality later
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Screen Time clicked"),
+                                ),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
