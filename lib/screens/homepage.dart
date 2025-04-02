@@ -1,6 +1,9 @@
+import 'package:aeye/assets/ScreenTimeChart.dart';
 import 'package:flutter/material.dart';
+
 import 'package:aeye/screens/Device.dart';
 import 'package:aeye/screens/DrivingMode.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -43,8 +46,27 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
 
-                  const Spacer(),
+                  // Add this import at the top
+                  const SizedBox(height: 20),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Screen Time",
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text("2h 45m", style: TextStyle(fontSize: 18)),
+                  ),
+                  const SizedBox(height: 16),
+                  const ScreenTimeChart(),
 
+                  const Spacer(), // Feature cards will still stay in the bottom half
                   // 🔹 Feature Cards Section
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.42,
