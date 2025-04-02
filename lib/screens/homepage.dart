@@ -140,6 +140,7 @@ class FeatureCard extends StatefulWidget {
   final double height;
   final double iconSize;
   final double fontSize;
+  final VoidCallback? onTap;
 
   const FeatureCard({
     super.key,
@@ -149,6 +150,7 @@ class FeatureCard extends StatefulWidget {
     this.height = 100,
     this.iconSize = 30,
     this.fontSize = 13,
+    this.onTap,
   });
 
   @override
@@ -162,6 +164,11 @@ class _FeatureCardState extends State<FeatureCard> {
     setState(() {
       _isTapped = !_isTapped;
     });
+
+    // Call the custom onTap function if provided
+    if (widget.onTap != null) {
+      widget.onTap!();
+    }
   }
 
   @override

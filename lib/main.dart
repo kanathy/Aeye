@@ -1,4 +1,5 @@
 import 'package:aeye/screens/HomePage.dart';
+import 'package:aeye/screens/Device.dart';
 import 'package:flutter/material.dart';
 
 // Import your screen here
