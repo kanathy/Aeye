@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
       body: Stack(
         children: [
           // 🔹 Background Color
-          Container(color: const Color.fromARGB(255, 206, 190, 174)),
+          Container(color: const Color.fromARGB(255, 214, 195, 178)),
 
           // 🔹 Content
           SafeArea(
@@ -136,7 +136,7 @@ class HomePage extends StatelessWidget {
 
       // 🔹 Bottom Navigation Bar
       bottomNavigationBar: BottomAppBar(
-        color: const Color.fromARGB(255, 206, 190, 174),
+        color: const Color.fromARGB(255, 214, 195, 178),
         elevation: 0,
         shape: const CircularNotchedRectangle(),
         child: Padding(
