@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:aeye/screens/cameraPage.dart'; // update path based on your project
+import 'package:aeye/screens/cameraPage.dart';
 
 class DrivingModePage extends StatelessWidget {
   const DrivingModePage({super.key});
@@ -13,19 +13,19 @@ class DrivingModePage extends StatelessWidget {
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
         title: const Text(
-          "Driving Mode",
+          "Select Your Driving Feature",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: ListView(
           children: [
-            const SizedBox(height: 40),
-            FeatureOption(
-              title: "Start Camera",
+            const SizedBox(height: 20),
+            DrivingFeatureCard(
               icon: Icons.videocam,
+              title: "Start Camera",
+              description: "Capture view while driving.",
               onTap: () {
                 Navigator.push(
                   context,
@@ -33,42 +33,65 @@ class DrivingModePage extends StatelessWidget {
                 );
               },
             ),
-
-            const SizedBox(height: 30),
-            FeatureOption(
-              title: "History",
+            const SizedBox(height: 20),
+            DrivingFeatureCard(
               icon: Icons.history,
+              title: "History",
+              description: "Review previously recorded trips.",
               onTap: () {
-                // TODO: Navigate to history or show history
                 ScaffoldMessenger.of(
                   context,
                 ).showSnackBar(const SnackBar(content: Text("History tapped")));
               },
             ),
-
-            const SizedBox(height: 30),
-            FeatureOption(
-              title: "Notification",
+            const SizedBox(height: 20),
+            DrivingFeatureCard(
               icon: Icons.notification_add,
+              title: "Notifications",
+              description: "Customize alerts for road safety.",
               onTap: () {
-                // TODO: Navigate to history or show history
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Notification tapped")),
+                  const SnackBar(content: Text("Notifications tapped")),
                 );
               },
             ),
 
-            const SizedBox(height: 30),
-            FeatureOption(
-              title: "Emergency Contact",
-              icon: Icons.contact_emergency,
+            const SizedBox(height: 20),
+            DrivingFeatureCard(
+              icon: Icons.map,
+              title: "Map",
+              description: "Find the location.",
               onTap: () {
-                // TODO: Navigate to history or show history
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(const SnackBar(content: Text("Map tapped")));
+              },
+            ),
+
+            const SizedBox(height: 20),
+            DrivingFeatureCard(
+              icon: Icons.health_and_safety,
+              title: "Health Care",
+              description: "Health Tips Section.",
+              onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Emergency Contacht tapped")),
+                  const SnackBar(content: Text("Health Care tapped")),
                 );
               },
             ),
+
+            const SizedBox(height: 20),
+            DrivingFeatureCard(
+              icon: Icons.contact_emergency,
+              title: "Emergency Contact",
+              description: "Access or add emergency numbers.",
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Emergency Contact tapped")),
+                );
+              },
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -76,47 +99,70 @@ class DrivingModePage extends StatelessWidget {
   }
 }
 
-// 🔹 Reusable Widget for Driving Mode Options
-class FeatureOption extends StatelessWidget {
-  final String title;
+class DrivingFeatureCard extends StatelessWidget {
   final IconData icon;
+  final String title;
+  final String description;
   final VoidCallback onTap;
 
-  const FeatureOption({
+  const DrivingFeatureCard({
     super.key,
-    required this.title,
     required this.icon,
+    required this.title,
+    required this.description,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(16),
       child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+        height: 110,
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: Colors.white.withOpacity(0.15),
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
+              blurRadius: 6,
+              offset: const Offset(0, 3),
             ),
           ],
         ),
         child: Row(
           children: [
-            Icon(icon, size: 32, color: Colors.white),
+            Container(
+              width: 50,
+              height: 50,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Icon(icon, size: 28, color: Colors.black),
+            ),
             const SizedBox(width: 16),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    description,
+                    style: const TextStyle(fontSize: 14, color: Colors.black87),
+                  ),
+                ],
               ),
             ),
           ],
