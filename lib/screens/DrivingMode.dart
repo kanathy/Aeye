@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:aeye/screens/cameraPage.dart'; // update path based on your project
 
 class DrivingModePage extends StatelessWidget {
   const DrivingModePage({super.key});
@@ -26,9 +27,9 @@ class DrivingModePage extends StatelessWidget {
               title: "Start Camera",
               icon: Icons.videocam,
               onTap: () {
-                // TODO: Add camera logic
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Start Camera tapped")),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CameraPage()),
                 );
               },
             ),
