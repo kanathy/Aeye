@@ -1,5 +1,10 @@
+import 'package:aeye/screens/EmergencyContact.dart';
+import 'package:aeye/screens/Heathcare.dart';
+import 'package:aeye/screens/Map.dart';
+import 'package:aeye/screens/Notification.dart';
 import 'package:flutter/material.dart';
 import 'package:aeye/screens/cameraPage.dart';
+import 'package:aeye/screens/History.dart';
 
 class DrivingModePage extends StatelessWidget {
   const DrivingModePage({super.key});
@@ -39,9 +44,10 @@ class DrivingModePage extends StatelessWidget {
               title: "History",
               description: "Review previously recorded trips.",
               onTap: () {
-                ScaffoldMessenger.of(
+                Navigator.push(
                   context,
-                ).showSnackBar(const SnackBar(content: Text("History tapped")));
+                  MaterialPageRoute(builder: (context) => const HistoryPage()),
+                );
               },
             ),
             const SizedBox(height: 20),
@@ -50,8 +56,11 @@ class DrivingModePage extends StatelessWidget {
               title: "Notifications",
               description: "Customize alerts for road safety.",
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Notifications tapped")),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const NotificationPage(),
+                  ),
                 );
               },
             ),
@@ -62,9 +71,10 @@ class DrivingModePage extends StatelessWidget {
               title: "Map",
               description: "Find the location.",
               onTap: () {
-                ScaffoldMessenger.of(
+                Navigator.push(
                   context,
-                ).showSnackBar(const SnackBar(content: Text("Map tapped")));
+                  MaterialPageRoute(builder: (context) => const MapPage()),
+                );
               },
             ),
 
@@ -74,8 +84,11 @@ class DrivingModePage extends StatelessWidget {
               title: "Health Care",
               description: "Health Tips Section.",
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Health Care tapped")),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HealthCarePage(),
+                  ),
                 );
               },
             ),
@@ -86,8 +99,11 @@ class DrivingModePage extends StatelessWidget {
               title: "Emergency Contact",
               description: "Access or add emergency numbers.",
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Emergency Contact tapped")),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const EmergencyContactPage(),
+                  ),
                 );
               },
             ),
