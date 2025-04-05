@@ -1,52 +1,96 @@
 import 'package:aeye/assets/ScreenTimeChart.dart';
 import 'package:flutter/material.dart';
-
 import 'package:aeye/screens/Device.dart';
 import 'package:aeye/screens/DrivingMode.dart';
-import 'package:fl_chart/fl_chart.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedFeatureIndex = -1;
+  int _selectedNavIndex = -1;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedFeatureIndex = -1;
+    _selectedNavIndex = -1;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 206, 190, 174),
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
+              onTap: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      ),
       body: Stack(
         children: [
-          // 🔹 Background Color
           Container(color: const Color.fromARGB(255, 214, 195, 178)),
-
-          // 🔹 Content
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
                 children: [
-                  // 🔹 Profile and Name Row
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      CircleAvatar(
-                        radius: 55, // 👈 Avatar radius
+                    children: [
+                      Builder(
+                        builder:
+                            (context) => IconButton(
+                              icon: const Icon(Icons.menu),
+                              onPressed:
+                                  () => Scaffold.of(context).openDrawer(),
+                              color: const Color.fromARGB(255, 33, 32, 32),
+                              iconSize: 28,
+                            ),
+                      ),
+                      const Spacer(),
+                      const CircleAvatar(
+                        radius: 20,
                         backgroundColor: Color(0xFFFDF6EC),
                         child: Icon(
                           Icons.person,
                           color: Colors.black,
-                          size: 52,
-                        ), // 👈 Icon size
-                      ),
-                      Text(
-                        "Prameh",
-                        style: TextStyle(
-                          fontSize: 22, // 👈 Font size for name
-                          color: Color.fromARGB(255, 33, 32, 32),
-                          fontWeight: FontWeight.bold,
+                          size: 20,
                         ),
                       ),
                     ],
                   ),
-
-                  // Add this import at the top
                   const SizedBox(height: 20),
                   const Align(
                     alignment: Alignment.centerLeft,
@@ -65,15 +109,13 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   const ScreenTimeChart(),
-
-                  const Spacer(), // Feature cards will still stay in the bottom half
-                  // 🔹 Feature Cards Section
+                  const Spacer(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.35,
                     child: Center(
                       child: Wrap(
-                        spacing: 25, // 👈 Horizontal space between cards
-                        runSpacing: 25, // 👈 Vertical space between cards
+                        spacing: 25,
+                        runSpacing: 25,
                         children: [
                           FeatureCard(
                             title: "Device",
@@ -81,13 +123,19 @@ class HomePage extends StatelessWidget {
                             width: 150,
                             height: 150,
                             iconSize: 34,
-                            fontSize: 22,
+                            fontSize: 16,
+                            index: 0,
+                            selectedIndex: _selectedFeatureIndex,
                             onTap: () {
+                              setState(() => _selectedFeatureIndex = 0);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const DevicePage(),
                                 ),
+                              ).then(
+                                (_) =>
+                                    setState(() => _selectedFeatureIndex = -1),
                               );
                             },
                           ),
@@ -97,13 +145,19 @@ class HomePage extends StatelessWidget {
                             width: 150,
                             height: 150,
                             iconSize: 34,
-                            fontSize: 22,
+                            fontSize: 16,
+                            index: 1,
+                            selectedIndex: _selectedFeatureIndex,
                             onTap: () {
+                              setState(() => _selectedFeatureIndex = 1);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const DrivingModePage(),
                                 ),
+                              ).then(
+                                (_) =>
+                                    setState(() => _selectedFeatureIndex = -1),
                               );
                             },
                           ),
@@ -113,7 +167,11 @@ class HomePage extends StatelessWidget {
                             width: 150,
                             height: 150,
                             iconSize: 34,
-                            fontSize: 22,
+                            fontSize: 16,
+                            index: 2,
+                            selectedIndex: _selectedFeatureIndex,
+                            onTap:
+                                () => setState(() => _selectedFeatureIndex = 2),
                           ),
                           FeatureCard(
                             title: "Eye Check",
@@ -121,26 +179,11 @@ class HomePage extends StatelessWidget {
                             width: 150,
                             height: 150,
                             iconSize: 34,
-                            fontSize: 22,
-                          ),
-
-                          FeatureCard(
-                            title: "Screen Time",
-                            icon:
-                                Icons
-                                    .bar_chart, // or use Icons.access_time if you prefer
-                            width: 150,
-                            height: 150,
-                            iconSize: 34,
-                            fontSize: 22,
-                            onTap: () {
-                              // Optional: Add navigation or functionality later
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Screen Time clicked"),
-                                ),
-                              );
-                            },
+                            fontSize: 16,
+                            index: 3,
+                            selectedIndex: _selectedFeatureIndex,
+                            onTap:
+                                () => setState(() => _selectedFeatureIndex = 3),
                           ),
                         ],
                       ),
@@ -152,8 +195,6 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-
-      // 🔹 Bottom Navigation Bar
       bottomNavigationBar: BottomAppBar(
         color: const Color.fromARGB(255, 214, 195, 178),
         elevation: 0,
@@ -164,24 +205,48 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: const Icon(Icons.home, color: Colors.black, size: 28),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(Icons.flash_on, color: Colors.black, size: 28),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(Icons.person, color: Colors.black, size: 28),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(
-                  Icons.dashboard,
-                  color: Colors.black,
+                icon: Icon(
+                  Icons.home,
+                  color:
+                      _selectedNavIndex == 0
+                          ? const Color(0xFFB99435)
+                          : Colors.black,
                   size: 28,
                 ),
-                onPressed: () {},
+                onPressed: () => setState(() => _selectedNavIndex = 0),
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.flash_on,
+                  color:
+                      _selectedNavIndex == 1
+                          ? const Color(0xFFB99435)
+                          : Colors.black,
+                  size: 28,
+                ),
+                onPressed: () => setState(() => _selectedNavIndex = 1),
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.person,
+                  color:
+                      _selectedNavIndex == 2
+                          ? const Color(0xFFB99435)
+                          : Colors.black,
+                  size: 28,
+                ),
+                onPressed: () => setState(() => _selectedNavIndex = 2),
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.dashboard,
+                  color:
+                      _selectedNavIndex == 3
+                          ? const Color(0xFFB99435)
+                          : Colors.black,
+                  size: 28,
+                ),
+                onPressed: () => setState(() => _selectedNavIndex = 3),
               ),
             ],
           ),
@@ -191,7 +256,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// 🔹 FeatureCard Widget (Customizable Size & Style)
+// 🔹 FeatureCard Widget
 class FeatureCard extends StatefulWidget {
   final String title;
   final IconData icon;
@@ -200,6 +265,8 @@ class FeatureCard extends StatefulWidget {
   final double iconSize;
   final double fontSize;
   final VoidCallback? onTap;
+  final int index;
+  final int selectedIndex;
 
   const FeatureCard({
     super.key,
@@ -210,6 +277,8 @@ class FeatureCard extends StatefulWidget {
     this.iconSize = 30,
     this.fontSize = 13,
     this.onTap,
+    required this.index,
+    required this.selectedIndex,
   });
 
   @override
@@ -220,14 +289,8 @@ class _FeatureCardState extends State<FeatureCard> {
   bool _isTapped = false;
 
   void _handleTap() {
-    setState(() {
-      _isTapped = !_isTapped;
-    });
-
-    // Call the custom onTap function if provided
-    if (widget.onTap != null) {
-      widget.onTap!();
-    }
+    setState(() => _isTapped = !_isTapped);
+    if (widget.onTap != null) widget.onTap!();
   }
 
   @override
@@ -239,10 +302,7 @@ class _FeatureCardState extends State<FeatureCard> {
         width: widget.width,
         height: widget.height,
         decoration: BoxDecoration(
-          color:
-              _isTapped
-                  ? const Color(0xFFBA965A)
-                  : const Color.fromARGB(255, 44, 43, 43),
+          color: const Color.fromARGB(255, 44, 43, 43),
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -255,13 +315,20 @@ class _FeatureCardState extends State<FeatureCard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(widget.icon, size: 40, color: Colors.white),
+            Icon(
+              widget.icon,
+              size: widget.iconSize,
+              color:
+                  widget.index == widget.selectedIndex
+                      ? const Color(0xFFB99435)
+                      : Colors.white,
+            ),
             const SizedBox(height: 8),
             Text(
               widget.title,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 15,
+                fontSize: widget.fontSize,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),
