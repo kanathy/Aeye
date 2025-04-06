@@ -5,6 +5,7 @@ import 'package:aeye/screens/Notification.dart';
 import 'package:flutter/material.dart';
 import 'package:aeye/screens/cameraPage.dart';
 import 'package:aeye/screens/History.dart';
+import 'package:aeye/screens/Map.dart';
 
 class DrivingModePage extends StatelessWidget {
   const DrivingModePage({super.key});
@@ -73,7 +74,7 @@ class DrivingModePage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const MapPage()),
+                  MaterialPageRoute(builder: (context) => OSMMapScreen()),
                 );
               },
             ),
